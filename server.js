@@ -82,7 +82,7 @@ const handleRequest = (req, res) => {
     } else {
       res.writeHead(200, { 'Content-Type': contentType });
       const finalContent = extension === '.md'
-        ? marked(content.toString())
+        ? `<!DOCTYPE html><html><head><title>${relPath}</title><link rel="icon" href="./app/favicon.ico"  type="image/icon type"></head><body>\n${marked(content.toString())}\n</body></html>`
         : content;
 
       res.end(finalContent, 'utf-8');
