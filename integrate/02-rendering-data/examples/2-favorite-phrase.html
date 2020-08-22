@@ -22,7 +22,7 @@
     };
 
     // log this variable in the console for a history of:
-    //  all user ineractions
+    //  all user interactions
     //  all state changes
     const appLog = [{
       state: deepClone(state)
@@ -33,26 +33,33 @@
     'use strict';
 
     const renderPhrasesList = (arrOfStrings) => {
-      const addListEntry = (list, next, index) => {
-        return `${list}\n<li id="${index}">${next}</li>`;
-      };
+      const olEl = document.createElement('ol');
+      olEl.start = 0;
 
-      const listItems = arrOfStrings
-        .reduce(addListEntry, '');
+      for (let i = 0; i < arrOfStrings.length; i++) {
+        const liEl = document.createElement('li');
+        liEl.id = i;
+        liEl.innerHTML = arrOfStrings[i];
+        olEl.appendChild(liEl);
+      }
 
-      return `<ol start="0">${listItems}\n</ol>`
+      return olEl;
     };
 
-    console.log('--- testing: renderPhrasesList');
-    console.assert(renderPhrasesList(['a', 'b']) === '<ol start="0">\n<li id="0">a</li>\n<li id="1">b</li>\n</ol>',
-      'Test 1');
-    console.assert(renderPhrasesList(['a', 'b', 'c']) === '<ol start="0">\n<li id="0">a</li>\n<li id="1">b</li>\n<li id="2">c</li>\n</ol>',
-      'Test 2');
-    console.assert(renderPhrasesList(['potato', 'tomato']) === '<ol start="0">\n<li id="0">potato</li>\n<li id="1">tomato</li>\n</ol>',
-      'Test 3');
-
     const renderFavorite = (id, phrase) => {
-      return `<p>favorite:</p> <code>${id}. ${phrase}</code>`;
+      const pEl = document.createElement('p');
+
+      const favoriteTextNode = document.createTextNode('favorite: ');
+      pEl.appendChild(favoriteTextNode);
+
+      const brEl = document.createElement('br');
+      pEl.appendChild(brEl);
+
+      const phraseCodeEl = document.createElement('code');
+      phraseCodeEl.innerHTML = `${id}. ${phrase}`;
+      pEl.appendChild(phraseCodeEl);
+
+      return pEl;
     };
   </script>
 
@@ -77,15 +84,20 @@
         return;
       }
 
+      // update state
       state.phrases.push(userInput);
       // log new state
       logEntry.state = deepClone(state);
 
-      const renderedLis = renderPhrasesList(state.phrases);
-      const phrasesEl = document.getElementById('phrases');
-      phrasesEl.innerHTML = renderedLis;
-      // log new view
-      logEntry.view = renderedLis;
+      // update UI from state
+      const phrasesContainer = document.getElementById('phrases');
+      while (phrasesContainer.firstChild) {
+        phrasesContainer.removeChild(phrasesContainer.firstChild);
+      }
+      const renderedList = renderPhrasesList(state.phrases);
+      phrasesContainer.appendChild(renderedList);
+      // log new view rendered from state
+      logEntry.view = renderedList;
     };
 
     const setFavoriteHandler = (event) => {
@@ -108,11 +120,15 @@
       // log new state
       logEntry.state = deepClone(state);
 
-      const favoritePhrase = state.phrases[state.favorite];
-      const favoriteView = renderFavorite(favoriteIndex, favoritePhrase);
-      document.getElementById('favorite').innerHTML = favoriteView;
-      // log new view
-      logEntry.view = favoriteView;
+      // update UI from state
+      const favoriteContainer = document.getElementById('favorite');
+      while (favoriteContainer.firstChild) {
+        favoriteContainer.removeChild(favoriteContainer.firstChild);
+      }
+      const newFavoriteView = renderFavorite(state.favorite, state.phrases[state.favorite]);
+      favoriteContainer.appendChild(newFavoriteView);
+      // log new view rendered from state
+      logEntry.view = newFavoriteView;
     };
   </script>
 </head>
@@ -122,9 +138,10 @@
   <main id='user interface'>
     <button onclick='console.log(appLog)'>appLog</button>
     <hr>
-    <input id='phrase-input' placeholder='new phrase'>
-    <button id='add-button'>add phrase</button>
-    <br>
+    <form id="add-phrase-form" action="#">
+      <input id='phrase-input' placeholder='new phrase'>
+      <button>add phrase</button>
+    </form>
     <br>
     <div id='favorite'></div>
     <hr>
@@ -134,8 +151,8 @@
   </main>
 
   <script id='listeners'>
-    document.getElementById('add-button')
-      .addEventListener('click', addPhraseHandler);
+    document.getElementById('add-phrase-form')
+      .addEventListener('submit', addPhraseHandler);
 
     document.getElementById('phrases')
       .addEventListener('click', setFavoriteHandler);
