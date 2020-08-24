@@ -9,6 +9,23 @@ const expect = chai.expect;
  * @returns {HTMLParagraphElement} a rendered paragraph element
  */
 const renderParagraph = (text, classList = []) => {
+  let pEl = document.createElement('p');
+  pEl.innerHTML = text;
+  pEl.classList.add(...classList);
+  /*
+  for (let item of classList){
+    pEl.classList.add(item);
+
+    /* it can also work with
+   if (classList.length > 1) {
+      pEl.className += `${item} `;
+    } else {
+      pEl.className = `${item}`;
+    }
+    */
+
+  }
+  return pEl;
 
 };
 
