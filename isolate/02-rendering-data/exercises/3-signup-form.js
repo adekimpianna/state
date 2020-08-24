@@ -14,6 +14,9 @@ const signupForm = (appName, greeting = '') => {
 
   if (greeting) {
     // render a 'P' element and append it to the form
+    const pEl = document.createElement('p');
+    pEl.innerHTML = `${appName} welcomes you!`
+    formEl.appendChild(pEl);
   }
 
   // this is the first input element, it's correct
@@ -22,13 +25,36 @@ const signupForm = (appName, greeting = '') => {
   input1.name = 'userName';
   input1.placeholder = 'user name';
   formEl.appendChild(input1);
-  formEl.appendChild(document.createElement('br'));
+  
 
   // render the second input
+  formEl.appendChild(document.createElement('br'));
 
   // render the third input
+  const input2 = document.createElement('input');
+  input2.type = 'email';
+  input2.name = 'email';
+  input2.placeholder = 'email';
+  formEl.appendChild(input2);
 
   // render the fourth input
+  formEl.appendChild(document.createElement('br'));
+
+   // render the 5th input
+   const input3 = document.createElement('input');
+   input3.type = 'password';
+   input3.name = 'password';
+   input3.placeholder = 'password';
+   formEl.appendChild(input3);
+
+  // render the 6th input
+  formEl.appendChild(document.createElement('br'));
+
+   // render the 7th input
+   const signUpBtn = document.createElement('input');
+   signUpBtn.type = 'button';
+   signUpBtn.setAttribute('value', `sign up for ${appName}`);
+   formEl.appendChild(signUpBtn);
 
   return formEl
 };

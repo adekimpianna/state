@@ -9,25 +9,37 @@ const expect = chai.expect;
  * @returns {HTMLParagraphElement} a rendered paragraph element
  */
 const renderParagraph = (text, classList = []) => {
+
   let pEl = document.createElement('p');
   pEl.innerHTML = text;
   pEl.classList.add(...classList);
-  /*
-  for (let item of classList){
-    pEl.classList.add(item);
+  return pEl;
 
-    /* it can also work with
-   if (classList.length > 1) {
+};
+
+/* it also works with this function
+
+const renderParagraph = (text, classList = []) => {
+
+  let pEl = document.createElement('p');
+  pEl.innerHTML = text;
+
+  for (let item of classList) {
+      pEl.classList.add(item);
+
+      /* or to replace line 25: with the iteration below 
+
+      if (classList.length > 1) {
       pEl.className += `${item} `;
-    } else {
+      } else {
       pEl.className = `${item}`;
-    }
-    */
-
+      }
   }
   return pEl;
 
 };
+*/
+  
 
 describe('renderParagraph: renders a paragraph with optional styling', () => {
   describe('"lorem ipsum", no classes', () => {
