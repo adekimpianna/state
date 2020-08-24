@@ -80,7 +80,7 @@ while (true) {
     continue;
   }
 
-  // the user input a valid number
+  // IMPORTANT!! the user input a valid number
   //  add the number to state
   state.numbers.push(nextNumber);
   //  update the average in state
@@ -95,10 +95,10 @@ while (true) {
 // render the final state for the user
 
 // read from state to find the average
-const firstLine = `the average is: ${state._}`;
+const firstLine = `the average is: ${state.average}`;
 
 // read from state to render the list of numbers
-const renderedNumbers = state._.reduce((list, nextNum) => {
+const renderedNumbers = state.numbers.reduce((list, nextNum) => {
   return `${list}\n: ${nextNum}`;
 }, '');
 const fullMessage = firstLine + renderedNumbers;

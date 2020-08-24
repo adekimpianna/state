@@ -76,13 +76,13 @@ while (stillPlaying) {
   };
   gameLog.push(setWordLog);
 
-  if (_) {
+  if ( userInput === null ) { //it was empty
     const invalidMessage = 'there is not escape!';
     alert(invalidMessage);
     setWordLog.invalid = invalidMessage;
     continue;
   }
-  if (_) {
+  if ( userInput === '' ) { //it was empty
     const invalidMessage = 'a word has at least one letter';
     alert(invalidMessage);
     setWordLog.invalid = invalidMessage;
@@ -111,7 +111,7 @@ while (stillPlaying) {
 while (stillPlaying) {
   const userInput = prompt('player 1: \nenter a hint to help the other player guess your word:');
 
-  if (_) {
+  if ( userInput === 'exit' ) { //it was empty
     alert('thank you for playing. \nhave a nice day');
     stillPlaying = false;
     gameLog.push({ action: 'exit' });
@@ -124,13 +124,13 @@ while (stillPlaying) {
   };
   gameLog.push(setHintLog);
 
-  if (_) {
+  if ( userInput === null) { //it was empty
     const invalidMessage = 'there is not escape!';
     alert(invalidMessage);
     setHintLog.invalid = invalidMessage;
     continue;
   }
-  if (_) {
+  if ( userInput === '') { //it was empty
     const invalidMessage = 'a hint has at least one letter';
     alert(invalidMessage);
     setHintLog.invalid = invalidMessage;
@@ -140,7 +140,7 @@ while (stillPlaying) {
   const confirmed = confirm(`are you sure you this is your hint?\n"${userInput}"`);
   setHintLog.confirmed = confirmed;
 
-  if (_) {
+  if ( confirmed ) { //it was empty
     state.hint = userInput;
     setHintLog.state = deepClone(state);
     break;
@@ -168,13 +168,13 @@ while (stillPlaying) {
   const userInput = prompt(message);
 
   // check for early-exit conditions
-  if (_) {
+  if ( userInput === 'exit' ) { // it was empty
     alert('thank you for playing. \nhave a nice day');
     stillPlaying = false;
     gameLog.push({ action: 'exit' });
     break;
   }
-  if (_) {
+  if ( userInput === null ) { // it was empty
     const giveUpLog = {
       action: 'give up'
     };
@@ -184,7 +184,7 @@ while (stillPlaying) {
     const confirmed = confirm(confirmGiveUpMessage);
     giveUpLog.confirmed = confirmed;
 
-    if (_) {
+    if ( confirmed ) { // it was empty
       alert(`you give up!!\n\nthe word was: \n\n  "${state.word}" \n\nyou'd guessed: \n\n  ${guess}`);
       stillPlaying = false;
       break;
@@ -201,19 +201,19 @@ while (stillPlaying) {
   gameLog.push(guessLog);
 
   // exit this input cycle if the user input is invalid
-  if (userInput._ !== _) {
+  if (userInput.length !==  1 ) { // it was empty after the dot and after not equal sign
     const invalidMessage = `"${userInput}" is not 1 character`;
     alert(invalidMessage);
     guessLog.invalid = invalidMessage;
     continue;
   }
-  if (state.guesses.includes(_)) {
+  if (state.guesses.includes(userInput)) {
     const invalidMessage = `"${userInput}" has already been guessed`;
     alert(invalidMessage);
     guessLog.invalid = invalidMessage;
     continue;
   }
-  if (!/^[a-zA-Z]+$/._(userInput)) {
+  if (!/^[a-zA-Z]+$/.test(userInput)) { // it was empty after the dot
     const invalidMessage = `"${userInput}" is not a letter`;
     alert(invalidMessage);
     guessLog.invalid = invalidMessage;
@@ -232,9 +232,9 @@ while (stillPlaying) {
 
   // does the generated guess match the target word?
   //  win!
-  if (_.toLowerCase() === _._.toLowerCase()) {
+  if (newGuess.toLowerCase() === state.word.toLowerCase()) { // it was empty before the dots
     const winMessage = `WIN! \n\n`
-      + `You guessed the word "${state.word}" in ${state._.length} guesses.\n\n`
+      + `You guessed the word "${state.word}" in ${state.guesses.length} guesses.\n\n`
       + `  ${state.guesses.join(', ')}`
     alert(winMessage);
 
@@ -248,8 +248,8 @@ while (stillPlaying) {
   // did the player use up all of their guesses?
   //  no win :(
   if (state.guesses.length === (state.word.length * 2)) {
-    const loseMessage = `lose :( \n\nthe word was: \n\n  "${state._}" \n\nyou'd guessed: \n\n  ${newGuess}\n\n`
-      + `  ${state._.join(', ')}`;
+    const loseMessage = `lose :( \n\nthe word was: \n\n  "${state.word}" \n\nyou'd guessed: \n\n  ${newGuess}\n\n`
+      + `  ${state.guesses.join(', ')}`; // it was empty in between state and join
     alert(loseMessage);
 
     // log the final state and if the game was won or lost

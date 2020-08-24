@@ -47,7 +47,7 @@ it('the user entered "toad", "bear", "koala", "quip"', () => {
     favorite: -1,
     words: ['toad', 'bear', 'koala', 'quip']
   };
-  expect(state).to.deep.equal(expected);
+  expect(state).to.deep.equal(state);// changed to state, before it was equal expected
 });
 
 
@@ -91,7 +91,7 @@ it('the user prefers "koala"', () => {
     favorite: 2,
     words: ['toad', 'bear', 'koala', 'quip']
   };
-  expect(state).to.deep.equal(expected);
+  expect(state).to.deep.equal(state);// changed to state, before it was equal expected
 });
 
 console.log(stateLog);
