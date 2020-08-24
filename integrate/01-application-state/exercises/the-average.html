@@ -69,22 +69,22 @@
       logEntry.input = userInput;
 
       // update state
-      state._.push(_);
-      state._ = average(_._);
+      state.numbers.push(userInput);
+      state.average = average(state.numbers);
       // log new state
-      logEntry.state = deepClone(_);
+      logEntry.state = deepClone(state);
 
       // render and append new list
-      const listView = renderNumberLis(_._);
-      document.getElementById('numbers-list').innerHTML = _;
+      const listView = renderNumberLis(state.numbers); 
+      document.getElementById('numbers-list').innerHTML = listView;
       // log new list view
-      logEntry.listView = _;
+      logEntry.listView = listView;
 
       // render and append new average
-      const averageView = _(_.average);
-      document.getElementById('average').innerHTML = _;
+      const averageView = renderAverage(state.average); //_(_.avarage)
+      document.getElementById('average').innerHTML = averageView; //avarageview
       // log new average view
-      logEntry.averageView = _;
+      logEntry.averageView = averageView; //averageview
     };
 
     const resetHandler = () => {
@@ -94,8 +94,8 @@
       appLog.push(logEntry);
 
       // reset state to it's initial values
-      state.numbers = _;
-      state.average = _;
+      state.numbers = []; //[]
+      state.average = 0; //0
       // log new state
       logEntry.state = deepClone(state);
 
