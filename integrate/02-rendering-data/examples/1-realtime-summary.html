@@ -5,15 +5,35 @@
   <meta charset='utf-8'>
   <title>Summary & Details</title>
 
+</head>
+
+<body>
+  <section id='user-interface'>
+    <button onclick='console.log(appLog)'>appLog</button>
+    <hr>
+    <form id='update-component-form'>
+      <label>is open: <input type='checkbox' name='isOpen' /></label> <br>
+      <label>summary text: <input type='text' name='summaryText' /></label> <br>
+      <label>main text: <input type='text' name='mainText' /></label>
+    </form>
+    <br>
+    <button id='reset-button'>reset</button>
+    <hr>
+    <div id='root'></div>
+  </section>
+
   <script src='../../../app/lib/deep-clone.js'></script>
 
   <script id='data'>
-    const state = {
+    const initialState = {
       isOpen: false,
       summaryText: '',
       mainText: '',
-    }
-    const appLog = [];
+    };
+    let state = deepClone(initialState);
+    const appLog = [{
+      initialState
+    }];
   </script>
 
   <script id='views'>
@@ -62,10 +82,18 @@
       // log new view rendered from state
       logEntry.view = newDetailsEl;
     };
-  </script>
 
-  <script id='init'>
-    window.onload = () => {
+    const initHandler = () => {
+      const logEntry = {
+        action: 'init',
+      };
+      appLog.push(logEntry);
+
+      // reset state
+      state = deepClone(initialState);
+      // log state
+      logEntry.state = deepClone(state);
+
       // render the initial state
       const root = document.getElementById('root');
       while (root.firstChild) {
@@ -73,31 +101,30 @@
       }
       const newDetailsEl = renderDetails(state);
       root.appendChild(newDetailsEl);
+      // log the view
+      logEntry.view = newDetailsEl;
 
-      appLog.push({
-        state: deepClone(state),
-        view: newDetailsEl
-      });
-    }
+    };
   </script>
-</head>
 
-<body>
-  <section id='user-interface'>
-    <button onclick='console.log(appLog)'>appLog</button>
-    <hr>
-    <form id='update-component-form'>
-      <label>is open: <input type='checkbox' name='isOpen' /></label> <br>
-      <label>summary text: <input type='text' name='summaryText' /></label> <br>
-      <label>main text: <input type='text' name='mainText' /></label>
-    </form>
-    <hr>
-    <div id='root'></div>
-  </section>
+  <script id='init'>
+    window.onload = initHandler;
+  </script>
 
   <script id='listeners'>
     document.getElementById('update-component-form')
       .addEventListener('input', updateComponentHandler);
+
+    document.getElementById('reset-button')
+      .addEventListener('click', initHandler);
+
+
+    document.getElementById('reset-button')
+      .addEventListener('hover', initHandler);
+
+
+    document.getElementById('reset-button')
+      .addEventListener('focus', initHandler);
 
     document.getElementById('root')
       .addEventListener('click', (e) => e.preventDefault());

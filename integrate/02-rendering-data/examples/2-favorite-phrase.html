@@ -11,6 +11,25 @@
     }
   </style>
 
+</head>
+
+<body>
+
+  <main id='user interface'>
+    <button onclick='console.log(appLog)'>appLog</button>
+    <hr>
+    <form id="add-phrase-form" action="#">
+      <input id='phrase-input' placeholder='new phrase'>
+      <button>add phrase</button>
+    </form>
+    <br>
+    <div id='favorite'></div>
+    <hr>
+    <p class='discrete'>click an item to set favorite</p>
+    <br>
+    <div id='phrases'></div>
+  </main>
+
   <script src='../../../app/lib/deep-clone.js'></script>
 
   <script id='data'>
@@ -131,24 +150,6 @@
       logEntry.view = newFavoriteView;
     };
   </script>
-</head>
-
-<body>
-
-  <main id='user interface'>
-    <button onclick='console.log(appLog)'>appLog</button>
-    <hr>
-    <form id="add-phrase-form" action="#">
-      <input id='phrase-input' placeholder='new phrase'>
-      <button>add phrase</button>
-    </form>
-    <br>
-    <div id='favorite'></div>
-    <hr>
-    <p class='discrete'>click an item to set favorite</p>
-    <br>
-    <div id='phrases'></div>
-  </main>
 
   <script id='listeners'>
     document.getElementById('add-phrase-form')
