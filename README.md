@@ -61,6 +61,13 @@ State/Log/Render are not bound to JavaScript. They are more general concepts. An
   - Render data into DOM elements
   - Re-render portions of the DOM for a reactive experience
 
+### Project Planning
+
+- Using a _backlog_ to set priorities
+- Writing _acceptance criteria_ to describe user stories
+- Creating a user-story dependency chart to plan your development schedule
+- Breaking user stories into code-able tasks
+
 [TOP](#state)
 
 ---
@@ -260,5 +267,14 @@ Screen recordings of class.  Coaches, when sending your PR's with links please .
 1. [Object vs. State](https://vimeo.com/448849518)
 1. [Integrating State](https://vimeo.com/448849847)
 
+#### Week 2
+
+1. [Project Planning & Isolate Rendering Data pt. 1](https://vimeo.com/451212160)
+1. [Isolate Rendering Data pt. 2 & Elements vs. Nodes](https://vimeo.com/451212701)
+1. [Integrate Rendering Data](https://vimeo.com/451213025)
+1. [Listener vs. Handler & Quiz Refactor pt. 1](https://vimeo.com/451213285)
+1. [Quiz Refactor pt. 2](https://vimeo.com/451213479)
+1. [Quiz Refactor pt. 3](https://vimeo.com/451213762)
+   - [Quiz Refactor Repo](https://github.com/HackYourFutureBelgium/refactor-code-explained-quiz)
 
 [TOP](#state)
