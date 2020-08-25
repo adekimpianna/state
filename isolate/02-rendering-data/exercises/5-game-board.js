@@ -8,9 +8,21 @@ const expect = chai.expect;
  * @param {Array[]} arrOfArrs - a 2D array representing the game board
  * @returns {HTMLTableElement} the rendered game board
  */
+
 const renderGameBoard = (arrOfArrs) => {
-  const tableEl = document.createElement('table');
- 
+  const table = document.createElement('table');
+  
+  arrOfArrs.forEach(array => {
+    const tRow = document.createElement('tr');
+    array.forEach(item => {
+      const tD = document.createElement('td');
+      tD.innerHTML = item;
+      tRow.appendChild(tD);
+    });
+    table.appendChild(tRow);
+  });
+
+  return table;
 };
 
 
