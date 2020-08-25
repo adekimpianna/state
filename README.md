@@ -74,7 +74,7 @@ State/Log/Render are not bound to JavaScript. They are more general concepts. An
 
 ## About the Projects
 
-In the previous module you learned to decompose & plan projects, organize your code, and use HTML/CSS/JS to implement simple websites that process user input.  All well and good but there was something missing.  Your projects never "remembered" anything!
+In the previous module you learned to decompose & plan projects, organize your code, and use HTML/CSS/JS to implement simple websites that process user input.  All well and good but there was something missing.  Your projects never "remembered" anything.
 
 Enter: __State__.  This is a fancy programming term to talk about the _data_ stored by your web pages.  Nearly every app you use has state -> message histories, images, profile details, weather reports, ... you name it!  Data is the core of any application.  Just like you learned to write tests to describe your functions and show that they do what they should, you will learn how to use schemas and validation to prove that your program data in fact what you say it is.
 
@@ -82,33 +82,7 @@ Your new projects will be more interesting, but they will also be a more complic
 
 To help you understand and debug your projects you will learn about __logging__ - this is a technique where you store a record of every user interaction, all user input, and each _state change_.  It will take some time before you're comfortable logging your projects. Once you are familiar with this technique you will find that it is helpful way to simplify and understand what is happening in your program.
 
-### Planning your Projects
-
-In this module you'll be flipping everything upside down! In previous modules you learned to develop your projects from the user interface backwards, beginning by planning what a user will see on the screen and how they will in interact with this.  Starting now you will learn to do things from the inside out:
-
-1. __What can a user do on your website?__ Write user stories to describe the user's possible interactions with your site
-2. __What data is necessary for these user stories?__  Write a schema to describe & validate your project's data. Try determining what will be the best order to develope these stories.
-3. __How does the UI represent *state* and *user interactions*?__ Write a wireframe to describe how the UI will represent the program state for users, and how users can interact with the state.
-4. __What code do you need to write?__ Fill out your development strategy with the code you will need to write, and who is responsible for what.
-
-### Separating your Concerns
-
-A working project is not enough! For projects in this module we will expect you to turn in code that is well organized & documented according to it's role.  Your projects should have these directories:
-
-- `/src/logic`: contains any functions and tests, and a README describing what is in each file
-- `/src/handlers`: contains the handlers for your app, one per user story.  and a helpful README
-- `/src/listeners`: contains the listeners for your app, generally one per user story, and a helpful README
-- `src/views`: contains the functions your app uses to render data for the UI
-- `src/init.js`: contains the code to render your initial UI and log the initial state (_optional_)
-- `src/data.js`: contains your initial state
-- `src/log.js`: contains the initial empty log for your project.  For now, just an empty array
-- `style.css`: contains the CSS for your web page and any helpful comments
-- `index.html`: contains the initial DOM for your user interface & requires all scripts
-- `README.md`: describes what your project does & how to use it.
-- `development-strategy.md`: a file containing your team's development strategy.
-- `user-stories.md`: a file containing suggested user stories
-
-Your project will contain one more directory called `/lib`, but there is nothing for you to write in here. This folder will contain dependencies for your project. Feeling motivated? take a look through these files to try and understand them!
+[![project architecture](./state-project-architecture.svg)](https://excalidraw.com/#json=6555846108512256,LRCbA630IGfK6OaqUNwUjw)
 
 [TOP](#state)
 
@@ -275,6 +249,7 @@ Screen recordings of class.  Coaches, when sending your PR's with links please .
 1. [Listener vs. Handler & Quiz Refactor pt. 1](https://vimeo.com/451213285)
 1. [Quiz Refactor pt. 2](https://vimeo.com/451213479)
 1. [Quiz Refactor pt. 3](https://vimeo.com/451213762)
-   - [Quiz Refactor Repo](https://github.com/HackYourFutureBelgium/refactor-code-explained-quiz)
+    - [Quiz Refactor Repo](https://github.com/HackYourFutureBelgium/refactor-code-explained-quiz)
+    - [Another quiz refactor](https://github.com/HackYourFutureBelgium/refator-simple-steps-quiz)
 
 [TOP](#state)
