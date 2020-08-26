@@ -78,9 +78,19 @@
       inspect the demo and it's logs to figure out what they should render
     */
     const renderNumberList = (arrOfNumbers) => {
-
+      const ulEl = document.createElement('ul');
+      arrOfNumbers.forEach(element => {
+        const liEl = document.createElement('li');
+        liEl.innerHTML = element;
+        ulEl.appendChild(liEl);
+      });    
+      return ulEl;
     };
+
     const renderAverage = (average) => {
+      const pEl = document.createElement('p');
+      pEl.innerHTML = `Average: ${average}`; 
+      return pEl;
 
     };
   </script>
@@ -100,7 +110,7 @@
       logEntry.input = userInput;
       // update state
       state.numbers.push(userInput);
-      state.average = average(_._);
+      state.average = average(state.numbers); //look at average funtion, the parameter is an array, state.numbers is an array
       // log new state
       logEntry.state = deepClone(state);
 
@@ -108,21 +118,24 @@
 
       // re-render the average
       const averageContainer = document.getElementById('average');
-      while (_._) {
-        _.removeChild(_._);
+      //console.log('avaregecont, firstchild:', averageContainer.firstChild); --> delete <p> because it will be replaced with <li>
+      
+        while (averageContainer.firstChild) { 
+        averageContainer.removeChild(averageContainer.firstChild); 
       }
-      const renderedAverage = renderAverage(_._);
-      _.appendChild(_);
+      const renderedAverage = renderAverage(state.average);
+      averageContainer.appendChild(renderedAverage);
       // log new view rendered from state
       logEntry.viewAverage = renderedAverage;
 
       // re-render the list of numbers
       const numbersContainer = document.getElementById('numbers-list');
-      while (_._) {
-        _.removeChild(_._);
+      while (numbersContainer.firstChild) {
+        numbersContainer.removeChild(numbersContainer.firstChild);
       }
-      const renderedList = renderNumberList(_._);
-      _.appendChild(_);
+      
+      const renderedList = renderNumberList(state.numbers);
+      numbersContainer.appendChild(renderedList);
       // log new view rendered from state
       logEntry.viewNumbers = renderedList;
     };
@@ -143,18 +156,18 @@
       document.getElementById('number-input').value = 0;
       // re-render the average
       const averageContainer = document.getElementById('average');
-      while (_._) {
-        _.removeChild(_._);
+      while (averageContainer.firstChild) {
+        averageContainer.removeChild(averageContainer.firstChild);
       }
-      const renderedAverage = renderAverage(_._);
-      _.appendChild(_);
+      const renderedAverage = renderAverage(state.average);
+      averageContainer.appendChild(renderedAverage);
       // log new view rendered from state
       logEntry.viewAverage = renderedAverage;
 
       // clear the numbers container
       const numbersContainer = document.getElementById('numbers-list');
-      while (_._) {
-        _.removeChild(_._);
+      while (numbersContainer.firstChild) {
+        numbersContainer.removeChild(numbersContainer.firstChild);
       }
     };
   </script>
